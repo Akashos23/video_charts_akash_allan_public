@@ -39,23 +39,7 @@ fun AnnualSold(
 ) {
     val generalValue = viewModel.getStatByYearByArticle();
 
-    val total = generalValue.values.sum()
-
-    val percentages = generalValue.mapValues { (_, value) ->
-        (value.toDouble() / total.toDouble()) * 100
-    }
-
-    val modelProducer = remember { PieChartModelProducer() }
-    LaunchedEffect(Unit) {
-        modelProducer.runTransaction {
-            pieModel {
-                series(
-                    percentages.values.map { it.toFloat() }
-                )
-            }
-        }
-    }
-
+    //val percentages = define the value in percentage
 
     Column(
         modifier = Modifier.padding(16.dp)
@@ -86,35 +70,8 @@ fun AnnualSold(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var productName = percentages.keys.toList()
+        //Create a pie chart who concern the number of sold product during the year in percentage format
+        //Display the value directly on the chart
 
-        PieChartHost(
-            chart = rememberPieChart(
-                sliceProvider =
-                    PieChart.SliceProvider.series(
-                        vicoTheme.pieChartColors.mapIndexed { index, color ->
-                            PieChart.Slice(
-                                fill = Fill(color),
-                                label = PieChart.SliceLabel.Inside(
-                                    TextComponent(TextStyle(if (index == 2) Color.Black else Color.White))
-                                )
-                            )
-                        }
-                    ),
-                valueFormatter = PieValueFormatter { _, value, _ -> "${value.toInt()}%" },
-            ),
-            modelProducer = modelProducer,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        percentages.forEach { (product, percentage) ->
-            Text(
-                text = "$product : %.2f%%".format(percentage)
-            )
-        }
     }
 }

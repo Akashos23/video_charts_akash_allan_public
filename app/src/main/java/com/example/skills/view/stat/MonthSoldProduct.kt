@@ -74,43 +74,8 @@ fun MonthSoldProduct(
 
         Spacer(modifier = Modifier.height(100.dp))
 
-        val modelProducer = remember { CartesianChartModelProducer() }
-        LaunchedEffect(Unit) {
-            modelProducer.runTransaction {
-                columnModel { series(monthSold.values) }
-            }
-        }
-
-        var productName = monthSold.keys.toList();
-
-        val marker = rememberDefaultCartesianMarker(
-            label = rememberTextComponent(),
-            labelPosition = DefaultCartesianMarker.LabelPosition.AbovePoint,
-            valueFormatter = DefaultCartesianMarker.ValueFormatter { _, targets ->
-                val point = (targets.first() as ColumnCartesianLayerMarkerTarget)
-                    .columns.first()
-
-                val month = productName.getOrNull(point.entry.x.toInt()) ?: ""
-
-                "$month : ${point.entry.y.toInt()} ventes"
-            }
-        )
-
-        CartesianChartHost(
-            rememberCartesianChart(
-                rememberColumnCartesianLayer(),
-                startAxis = VerticalAxis.rememberStart(),
-                bottomAxis = HorizontalAxis.rememberBottom(
-                    valueFormatter = { _, value, _ ->
-                        productName[value.toInt()] ?: ""
-                    }
-                ),
-                marker = marker,
-                markerController = CartesianMarkerController.rememberShowOnPress()
-            ),
-            modelProducer,
-        )
-
+        //Create a column chart who concern the number of sold product during the current mouth
+        //This chart need the title of product on abscissa and the value in ordinate, put also some marker on the chart then when we click the value, it display the value at the top
 
     }
 }

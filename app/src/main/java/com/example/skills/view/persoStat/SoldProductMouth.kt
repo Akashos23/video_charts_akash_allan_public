@@ -76,58 +76,7 @@ fun SoldProductMouth(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val modelProducer = remember { CartesianChartModelProducer() }
-        LaunchedEffect(Unit) {
-            modelProducer.runTransaction {
-                lineModel  {
-                    series(productList.values)
-                }
-            }
-        }
-
-        val line = LineCartesianLayer.rememberLine(
-            fill = LineCartesianLayer.LineFill.single(
-                Fill(Color.Blue)
-            ),
-            pointProvider = LineCartesianLayer.PointProvider.single(
-                LineCartesianLayer.Point(
-                    component = rememberShapeComponent(),
-                    size = 8.dp
-                )
-            )
-        )
-
-        val months = productList.keys.toList()
-
-        val marker = rememberDefaultCartesianMarker(
-            label = rememberTextComponent(),
-            labelPosition = DefaultCartesianMarker.LabelPosition.AbovePoint,
-            valueFormatter = DefaultCartesianMarker.ValueFormatter { _, targets ->
-                val point = (targets.first() as LineCartesianLayerMarkerTarget)
-                    .points.first()
-
-                val month = months.getOrNull(point.entry.x.toInt()) ?: ""
-
-                "$month : ${point.entry.y.toInt()} ventes"
-            }
-        )
-
-        CartesianChartHost(
-            chart = rememberCartesianChart(
-                rememberLineCartesianLayer(
-                    lineProvider = LineCartesianLayer.LineProvider.series(line)
-                ),
-                startAxis = VerticalAxis.rememberStart(),
-                bottomAxis = HorizontalAxis.rememberBottom(
-                    valueFormatter = { _, value, _ ->
-                        months[value.toInt()] ?: ""
-                    }
-                ),
-                marker = marker,
-                markerController = CartesianMarkerController.rememberShowOnPress()
-            ),
-            modelProducer = modelProducer,
-            modifier = Modifier.height(250.dp)
-        )
+        //Create a line chart with point on each value who concern the number of sold product during each mouth
+        //This chart need the mouth on abscissa and the value (number of sold product) in ordinate, put also some marker on the chart then when we click the value, it display the value at the top
     }
-    }
+}
