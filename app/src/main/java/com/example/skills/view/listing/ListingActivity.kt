@@ -151,5 +151,14 @@ fun RowItem(navController: NavController, listingItem: Listing) {
             ) {
                 Text("Stats")
             }
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = {
+                    navController.navigate("VideoDetail/${listingItem.id}")
+                }
+            ) {
+                Text("Video")
+            }
     }
 }

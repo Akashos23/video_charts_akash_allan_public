@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">skills</string>
+
+    <string name="video_page_title">Presentation video</string>
+    <string name="video_back">Back</string>
+    <string name="video_empty">No video published yet</string>
+    <string name="video_play">Play</string>
+    <string name="video_pause">Pause</string>
+    <string name="video_rewind">Back 10 seconds</string>
+    <string name="video_forward">Forward 10 seconds</string>
+    <string name="video_sound">Sound on or off</string>
+    <string name="video_loop">Loop</string>
+    <string name="video_fullscreen">Fullscreen</string>
+    <string name="video_publish">Publish a video</string>
+    <string name="video_delete">Delete video</string>
+    <string name="video_from_gallery">Choose from gallery</string>
+    <string name="video_from_camera">Record with camera</string>
+    <string name="video_link_label">URL (https, .mp4)</string>
+    <string name="video_use_demo_link">Use demo link</string>
+    <string name="video_publish_link">Publish this link</string>
+    <string name="video_cancel">Cancel</string>
+    <string name="video_error">Cannot play this video</string>
+    <string name="video_retry">Retry</string>
+    <string name="video_no_camera">No camera app found</string>
 </resources>

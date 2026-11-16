@@ -16,6 +16,7 @@ import com.example.skills.view.stat.AnnualSold
 import com.example.skills.view.stat.EvolutionStat
 import com.example.skills.view.stat.GeneraleStatActivity
 import com.example.skills.view.stat.MonthSoldProduct
+import com.example.skills.view.video.VideoDetailScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -48,6 +49,13 @@ fun NavigationApp() {
             } )){
             val id = requireNotNull(it.arguments).getInt("id")
             SoldProductMouth(navController, id)
+        }
+        composable("VideoDetail/{id}",
+            arguments = listOf(navArgument("id") {
+                type = NavType.IntType
+            } )){
+            val id = requireNotNull(it.arguments).getInt("id")
+            VideoDetailScreen(navController, id)
         }
     }
 }
